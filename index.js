@@ -1,9 +1,10 @@
-
 import express from 'express';
-import { RtcTokenBuilder, RtcRole } from 'agora-token';
 import dotenv from 'dotenv';
+import agoraToken from 'agora-token'; // Importación como módulo completo
 
 dotenv.config();
+
+const { RtcTokenBuilder, RtcRole } = agoraToken;
 
 const app = express();
 
