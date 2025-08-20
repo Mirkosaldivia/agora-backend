@@ -1,15 +1,21 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import agoraToken from 'agora-token'; // Importación como módulo completo
+import cors from 'cors';
+import agoraToken from 'agora-token';
 
 dotenv.config();
 
 const { RtcTokenBuilder, RtcRole } = agoraToken;
 
 const app = express();
+app.use(cors()); // Habilita CORS para permitir peticiones desde tu frontend
 
 const APP_ID = process.env.APP_ID;
 const APP_CERTIFICATE = process.env.APP_CERTIFICATE;
+
+app.get('/', (req, res) => {
+  res.send('Servidor de Agora Token funcionando correctamente');
+});
 
 app.get('/token', (req, res) => {
   const channelName = req.query.channel;
@@ -36,6 +42,6 @@ app.get('/token', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
